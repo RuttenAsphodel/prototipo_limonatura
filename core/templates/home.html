@@ -3,11 +3,54 @@
 {% block content %}
 
 
-<h4 class="text-success text-end">
-    Bienvenido {{ user.username | upper }} 
-</h4>
+<div class="container-fluid-lg  rounded-1 p-2">
+    <h3> Consola de Control Limonatura </h3>
+    
+    <h4 class="text-success text-end">
+        Bienvenido {{ user.username | upper }} 
+    </h4>
+
+</div>
+
 <hr>
-<h3> Inicio </h3>
+<div class="row row-cols-2 row-cols-md-3 g-2">
+    <div class="col">
+      <div class="card">
+            
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- {% if request.user.is_authenticated %} -->
    
 <!-- {% endif %} -->
