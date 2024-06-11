@@ -1,1 +1,9 @@
 Victel
+
+Formulario de Ingreso
+    Boton Guardar
+    Boton Eliminar
+    Boton Editar
+Listado
+Ver Detalle
+Formulario de Edicion
