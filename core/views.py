@@ -8,3 +8,9 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 def home(request):
     return render(request, 'home.html')
 
+# Vistas CRUD Categorias - Alejandra Vidal 
+# Vistas Autenticacion - Alejandra Vidal
+
+
+# Vistas CRUD Productos - Cristian Valenzuela 
+# Vistas CRUD Medios de pagos - Cristian Valenzuela

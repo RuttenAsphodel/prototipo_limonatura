@@ -22,4 +22,7 @@ class Pedido(models.Model):
     estado_pedido = models.CharField(max_length=255, choices=[('Pendiente', 'Pendiente'), ('Procesado', 'Procesado'), ('Enviado', 'Entregado'), ('Entregado', 'Entregado')], default='Pendiente')
     usuario_id = models.ForeignKey(User, on_delete=models.CASCADE)
     id_producto = models.ForeignKey(Producto,on_delete=models.CASCADE, verbose_name=("Producto"))
+
+class MedioPago(models.Model):
+    descripcion_medio = models.CharField(max_length=55, blank=False)
     
