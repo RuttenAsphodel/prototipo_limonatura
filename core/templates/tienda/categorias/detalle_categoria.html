@@ -1,0 +1,44 @@
+detalle_categoria.html
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Detalle de Categoría</h1>
+    <p><strong>ID:</strong> {{ categoria.id }}</p>
+    <p><strong>Nombre:</strong> {{ categoria.nombre }}</p>
+    
+    <h2>Productos en esta categoría</h2>
+    <ul class="list-group mb-4">
+        {% for producto in productos %}
+        <li class="list-group-item">{{ producto.nombre }} - {{ producto.precio }}</li>
+        {% empty %}
+        <li class="list-group-item">No hay productos en esta categoría.</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'actualizar_categoria' categoria.id %}" class="btn btn-warning"><i class="bi bi-pencil"></i> Editar</a>
+    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ categoria.id }}"><i class="bi bi-trash"></i> Eliminar</button>
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmDeleteModal{{ categoria.id }}" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro de que desea eliminar la categoría "{{ categoria.nombre }}"?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form method="post" action="{% url 'eliminar_categoria' categoria.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'listar_categorias' %}" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Volver a la lista</a>
+</div>
+{% endblock %}

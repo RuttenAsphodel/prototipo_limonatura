@@ -1,4 +1,9 @@
 Sterling
 
 Formulario de Ingreso
-Lista de Categorias
+    Boton Guardar
+    Boton Eliminar
+    Boton Editar
+Listado
+Ver Detalle
+Formulario de Edicion
