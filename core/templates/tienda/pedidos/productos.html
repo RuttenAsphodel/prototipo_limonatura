@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limonatura</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img class="header__logo" src="img/logo.png" alt="logotipo">
+        </a>
+    </header>
+
+    <nav class="navegacion">
+        <a class="navegacion__enlace navegacion__enlace--activo" href="index.html">Tienda</a>
+        <a class="navegacion__enlace" href="nosotros.html">Nosotros</a>
+    </nav>
+
+    <main class="contenedor">
+        <h1>Pedidos</h1>
+
+        <div class="camisa">
+            <img class="camisa__imagen" src="img/3.jpg" alt="Imagen del producto">
+
+            <div class="camisa__contenido">
+                <p>Claro, aquí tienes una pequeña descripción de contenido para la página de 
+                    inicio del sitio web de Limonatura:
+                    Bienvenida a Limonatura: Productos Naturales para Mujeres
+                    En Limonatura, nos dedicamos a ofrecer productos naturales 
+                    de alta calidad especialmente diseñados para mujeres que buscan 
+                    un estilo de vida saludable y equilibrado. Descubre nuestra amplia 
+                    gama de productos, desde cosméticos naturales hasta suplementos nutricionales, 
+                    todos elaborados con ingredientes orgánicos y sostenibles.
+                    Navega por nuestros catálogos digitales y encuentra productos que se 
+                    adaptan a tus necesidades. Disfruta de una experiencia de compra fácil y segura, 
+                    con opciones de pago flexibles y envíos rápidos a todo el país. Con Limonatura, 
+                    cada compra es una inversión en tu bienestar y belleza natural.
+                    ¡Únete a nuestra comunidad y empieza a vivir de manera más natural con 
+                    Limonatura! </p>
+
+                <form class="formulario">
+                    <select class="formulario__campo">
+                        <option disabled selected>--Seleccionar Talla--</option>
+                        <option>Chica</option>
+                        <option>Mediana</option>
+                        <option>Grande</option>
+                    </select>
+                    <input class="formulario__campo" type="number" placeholder="Cantidad" min="1">
+                    <input class="formulario__submit" type="submit" value="Agregar Al Carrito">
+                </form>
+            </div>
+        </div>
+
+        <!-- Formulario de Ingreso -->
+        <section>
+            <h2>Formulario de Ingreso</h2>
+            <form class="formulario" id="formulario-ingreso" onsubmit="agregarProducto(event)">
+                <input class="formulario__campo" type="text" id="nombre-producto" placeholder="Nombre del Producto" required>
+                <input class="formulario__campo" type="number" id="precio-producto" placeholder="Precio" min="0" required>
+                <input class="formulario__campo" type="text" id="descripcion-producto" placeholder="Descripción" required>
+                <input class="formulario__submit" type="submit" value="Guardar">
+            </form>
+        </section>
+
+        <!-- Listado -->
+        <section>
+            <h2>Listado de Pedidos</h2>
+            <ol class="listado" id="lista-productos">
+                <!-- Lista vacía para productos -->
+            </ol>
+        </section>
+
+        <!-- Formulario de Edición -->
+        <section>
+            <h2>Formulario de Edición</h2>
+            <form class="formulario" id="formulario-edicion" onsubmit="guardarCambios(event)">
+                <input class="formulario__campo" type="text" id="editar-nombre" placeholder="Nombre del Producto" required>
+                <input class="formulario__campo" type="number" id="editar-precio" placeholder="Precio" min="0" required>
+                <input class="formulario__campo" type="text" id="editar-descripcion" placeholder="Descripción" required>
+                <input class="formulario__submit" type="submit" value="Guardar Cambios">
+            </form>
+        </section>
+
+        <!-- Detalles del Producto -->
+        <section>
+            <h2>Detalles del Pedidos</h2>
+            <div id="detalle-producto">
+                <p><strong>Nombre:</strong> <span id="detalle-nombre"></span></p>
+                <p><strong>Precio:</strong> <span id="detalle-precio"></span></p>
+                <p><strong>Descripción:</strong> <span id="detalle-descripcion"></span></p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let productos = [];
+
+        function agregarProducto(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre-producto').value;
+            const precio = document.getElementById('precio-producto').value;
+            const descripcion = document.getElementById('descripcion-producto').value;
+            const producto = { nombre, precio, descripcion };
+            productos.push(producto);
+            actualizarListado();
+            document.getElementById('formulario-ingreso').reset();
+        }
+
+        function actualizarListado() {
+            const lista = document.getElementById('lista-productos');
+            lista.innerHTML = '';
+            productos.forEach((producto, index) => {
+                const item = document.createElement('li');
+                item.className = 'listado__item';
+                item.innerHTML = `
+                    <span>${producto.nombre}</span>
+                    <button class="boton boton--detalle" onclick="mostrarDetalle(${index})">Ver Detalle</button>
+                    <button class="boton boton--editar" onclick="editarProducto(${index})">Editar</button>
+                    <button class="boton boton--eliminar" onclick="eliminarProducto(${index})">Eliminar</button>
+                `;
+                lista.appendChild(item);
+            });
+        }
+
+        function mostrarDetalle(index) {
+            const producto = productos[index];
+            document.getElementById('detalle-nombre').textContent = producto.nombre;
+            document.getElementById('detalle-precio').textContent = producto.precio;
+            document.getElementById('detalle-descripcion').textContent = producto.descripcion;
+        }
+
+        function editarProducto(index) {
+            const producto = productos[index];
+            document.getElementById('editar-nombre').value = producto.nombre;
+            document.getElementById('editar-precio').value = producto.precio;
+            document.getElementById('editar-descripcion').value = producto.descripcion;
+            document.getElementById('formulario-edicion').onsubmit = function(event) {
+                event.preventDefault();
+                guardarCambios(index);
+            };
+        }
+
+        function guardarCambios(index) {
+            const nombre = document.getElementById('editar-nombre').value;
+            const precio = document.getElementById('editar-precio').value;
+            const descripcion = document.getElementById('editar-descripcion').value;
+            productos[index] = { nombre, precio, descripcion };
+            actualizarListado();
+            document.getElementById('formulario-edicion').reset();
+        }
+
+        function eliminarProducto(index) {
+            if (confirm(`¿Seguro que deseas eliminar el producto: ${productos[index].nombre}?`)) {
+                productos.splice(index, 1);
+                actualizarListado();
+            }
+        }
+    </script>
+
+
+
+<footer>
+    <p class="footer__texto">Limonatura Store - Todos los derechos Reservados 2024.</p>
+</footer>
+
+</body>
+</html>
