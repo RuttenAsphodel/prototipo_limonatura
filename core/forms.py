@@ -1,10 +1,10 @@
 from django import forms 
-from models import *
+from .models import Categoria, MedioPago
 
 # Forms para Categorias
 class FormCrearCategoria(forms.ModelForm):
     class Meta:
-        models = Categoria
+        model = Categoria
         fields = ['descripcion_categoria']
         widgets = {
             'Categoria': forms.TextInput(attrs={
@@ -19,7 +19,7 @@ class FormCrearCategoria(forms.ModelForm):
 # Forms para Medios de Pago
 class FormCrearMedioPago(forms.ModelForm):
     class Meta: 
-        models = MedioPago
+        model = MedioPago
         fields = ['descripcion_medio']
         widgets = {
             'MedioPago': forms.TextInput(attrs={
@@ -27,7 +27,7 @@ class FormCrearMedioPago(forms.ModelForm):
                 'required'}),
         }
         
-        labels = {'descripcion_medio', 'Medio de Pago'}
+        labels = {'descripcion_medio': 'Medio de Pago'}
     
     # Valida si exite medio de pago 
     def validarMedioPago(self):

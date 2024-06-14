@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ 
+<h3>Listado de Medios de Pago</h3>
+
+<a href="{% url 'crear_medio_pago' %}">Crear Medio de Pago</a>
+
+
+<div
+        class="table-responsive small"
+    >
+        <table
+            class="table table-centered table-nowrap table-hover"
+        >
+            <thead class="thead-light table-active table-dark">
+
+                <tr>
+                    <th class="border-0">ID</th>
+                    <th class="border-0">Medio Pago</th>
+                    <th class="border-0">Acciones</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for mediopago in mediopago %}
+                <tr
+                >
+                    <td>{{ mediopago.id }}</td>
+                    <td>{{ mediopago.descripcion_medio }}</td>
+                    <td>
+                        
+                        <a href="#" target = "_blank">Ver detalle</a> |
+                        <a href="#">Eliminar</a> 
+           
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}

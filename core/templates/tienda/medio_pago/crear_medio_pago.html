@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+
+<!-- {% if request.user.is_authenticated %} -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Medios de Pago</title>
+</head>
+<body>
+    <div class="container"><h1>Crear Medio de Pago</h1></div>
+    
+
+    <div class="container">
+        <form method="post">
+      
+            {% csrf_token %}
+            {% bootstrap_form form layout='horizontal' %}
+        
+            <div class="container mb-4">
+                <button type="submit" class="btn btn-primary">
+                    Crear Medio Pago
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+
+    <a href="{% url 'listar_medio_pago' %}">Volver al Contenedor de Medios de Pago </a>
+</body>
+
+<!-- {% endif %} -->
+
+{% endblock %}
